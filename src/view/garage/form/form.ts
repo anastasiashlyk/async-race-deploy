@@ -29,7 +29,7 @@ export class Form implements View {
     colorInput.type = 'color';
     colorInput.setAttribute('required', 'true');
     colorInput.id = `${text}-color`;
-    const submitButton = createElement({ tag: 'button', text: `${text}` });
+    const submitButton = createElement({ tag: 'button', text: `${text}`, css: ['btn'] });
     submitButton.type = 'submit';
     submitButton.id = `${text}-submit`;
 

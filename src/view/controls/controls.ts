@@ -25,8 +25,8 @@ export class Controls implements View {
   private createView(): HTMLElement {
     const element = createElement({ tag: 'header' });
 
-    this.buttonGarage = createElement({ tag: 'button', text: 'Garage' });
-    this.buttonWinners = createElement({ tag: 'button', text: 'Winners' });
+    this.buttonGarage = createElement({ tag: 'button', text: 'Garage', css: ['btn'] });
+    this.buttonWinners = createElement({ tag: 'button', text: 'Winners', css: ['btn'] });
     element.append(this.buttonGarage, this.buttonWinners);
 
     return element;

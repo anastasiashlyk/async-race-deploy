@@ -1,5 +1,6 @@
 import { createElement } from '../../../utils/create-html';
-import { updateCar, type CarInfo } from '../../../utils/api-requests';
+import { updateCar } from '../../../utils/api-requests/crud';
+import type { CarInfo } from '../../../utils/api-requests/car-interface';
 import type { View } from '../../interface/view';
 import { Form } from '../form/form';
 

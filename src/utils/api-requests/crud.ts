@@ -1,15 +1,5 @@
-export interface CarInfo {
-  id: number;
-  name: string;
-  color: string;
-}
-
-export interface GarageResponse {
-  cars: CarInfo[];
-  totalCount: number | undefined;
-}
-
-const BASE_URL = 'http://localhost:3000';
+import type { CarInfo, GarageResponse } from './car-interface';
+import { BASE_URL } from './car-interface';
 
 export async function getGarage(page?: number, limit?: number): Promise<GarageResponse> {
   const parameters = new URLSearchParams();
