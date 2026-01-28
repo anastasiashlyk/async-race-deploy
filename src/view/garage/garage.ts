@@ -8,6 +8,7 @@ import { createCar } from '../../utils/api-requests/crud';
 import { Modal } from './modal/modal';
 import type { GarageResponse } from '../../utils/api-requests/car-interface';
 import { generateRandomCars } from '../../utils/random-car-generator';
+import { saveWinner } from '../../utils/api-requests/winners';
 
 const CARS_PER_PAGE = 7;
 
@@ -224,6 +225,7 @@ export class Garage implements View {
 
     try {
       const winner = await Promise.any(racePromises);
+      await saveWinner(winner.id, winner.time / 1000);
       this.showWinnerAnnouncement(winner.name, winner.time);
     } catch {
       // All cars crashed

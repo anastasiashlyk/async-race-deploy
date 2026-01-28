@@ -2,6 +2,7 @@ import type { View } from '../../interface/view';
 import { createElement } from '../../../utils/create-html';
 import { CAR_SVG } from '../../../assets/car-svg';
 import { deleteCar } from '../../../utils/api-requests/crud';
+import { deleteWinner } from '../../../utils/api-requests/winners';
 import type { CarInfo } from '../../../utils/api-requests/car-interface';
 import { EngineStatus } from '../../../utils/api-requests/car-interface';
 import { Modal } from '../modal/modal';
@@ -85,7 +86,7 @@ export class Car implements View {
     return element;
   }
 
-  private async startEngineHandler(): Promise<{ name: string; time: number }> {
+  private async startEngineHandler(): Promise<{ id: number; name: string; time: number }> {
     this.buttonA.disabled = true;
     this.buttonB.disabled = false;
     this.isDriving = true;
@@ -102,10 +103,10 @@ export class Car implements View {
       throw new Error('Car broke down');
     }
 
-    return { name: this.getName(), time: duration };
+    return { id: this.id, name: this.getName(), time: duration };
   }
 
-  public start(): Promise<{ name: string; time: number }> {
+  public start(): Promise<{ id: number; name: string; time: number }> {
     return this.startEngineHandler();
   }
 
@@ -171,6 +172,7 @@ export class Car implements View {
   }
 
   private async deleteClickHandler(): Promise<void> {
+    await deleteWinner(this.id).catch(() => {});
     const ok = await deleteCar(this.id);
     if (ok) {
       this.html.remove();

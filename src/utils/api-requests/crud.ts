@@ -24,6 +24,22 @@ export async function getGarage(page?: number, limit?: number): Promise<GarageRe
   };
 }
 
+export async function getCarById(id: number): Promise<CarInfo | undefined> {
+  const response = await fetch(`${BASE_URL}/garage/${id}`, {
+    method: 'GET',
+  });
+
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  if (!response.ok) {
+    throw new Error('Error fetching car');
+  }
+
+  return response.json();
+}
+
 export async function deleteCar(id: number): Promise<boolean> {
   const response = await fetch(`${BASE_URL}/garage/${id}`, {
     method: 'DELETE',
